@@ -41,7 +41,7 @@ class PhabricatorOpenCommand(sublime_plugin.WindowCommand):
 
         if git_branch is None and settings.get('branch_use_arc_land_onto_default', False):
             # Get current branch
-            arc_args = [settings.get('arc_path', 'arc'), 'get-config', 'arc.land.onto.default']
+            arc_args = [settings.get('arc_path', 'arc'), 'get-config', 'arc.land.onto.default', '--']
             arc_child = subprocess.Popen(
                 arc_args, cwd=filedir,
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -83,7 +83,7 @@ class PhabricatorOpenCommand(sublime_plugin.WindowCommand):
         # Run `arc browse` and dump the output to the console
         browse_path = '{0}:{1}'.format(filename, lines)
         arc_args = [
-            settings.get('arc_path', 'arc'), 'browse', browse_path, '--branch', escaped_branch]
+            settings.get('arc_path', 'arc'), 'browse', browse_path, '--branch', escaped_branch, '--']
         arc_child = subprocess.Popen(
             arc_args, cwd=filedir,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
